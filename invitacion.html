@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación con Cuenta Regresiva</title>
+    <title>Invitación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,60 +12,21 @@
             padding: 0;
             background-color: #000;
             color: #fff;
-            overflow-x: hidden;
         }
-
-        /* Estilo del video */
         video {
-            width: 100%;
-            max-width: 800px; /* Para que no sea demasiado grande en pantallas grandes */
+            width: 80%;
             height: auto;
-            display: none; /* Ocultamos el video inicialmente */
+            display: none; /* El video estará oculto hasta que termine la cuenta regresiva */
             margin-top: 20px;
-            border-radius: 10px;
         }
-
-        /* Estilo de la cuenta regresiva */
         #countdown {
-            font-size: 4vw; /* Usamos un tamaño relativo */
+            font-size: 2em;
             margin-top: 20%;
-            font-weight: bold;
-            color: #ffffff;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-            display: inline-block;
         }
-
-        /* Estilo del mensaje */
         .message {
-            font-size: 2vw;
-            display: none; /* Inicialmente oculto */
-            margin-top: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        /* Asegura que el diseño se adapte bien a dispositivos pequeños */
-        @media (max-width: 768px) {
-            #countdown {
-                font-size: 8vw; /* Aumentamos el tamaño en pantallas pequeñas */
-            }
-
-            .message {
-                font-size: 5vw; /* El texto también se hace más grande en móviles */
-            }
-        }
-
-        @media (max-width: 480px) {
-            #countdown {
-                font-size: 10vw; /* Muy grande en pantallas pequeñas como teléfonos */
-            }
-
-            .message {
-                font-size: 7vw;
-            }
+            font-size: 1.5em;
+            display: none; /* El mensaje se muestra junto con el video */
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -112,3 +73,4 @@
     </script>
 </body>
 </html>
+
