@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación con Cuenta Regresiva</title>
+    <style>
+        @font-face {
+            font-family: 'Brittany';
+            src: url('Brittany.woff2') format('woff2'),
+                 url('Brittany.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f5f0;
+            color: #5a4743;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        #countdown-wrapper {
+            position: absolute;
+            top: calc(50% + 3cm); /* Ajustado para centrar */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            display: none; /* Oculto por defecto */
+        }
+
+        #countdown-title {
+            font-family: 'Brittany', sans-serif;
+            font-size: 50px;
+            font-style: italic;
+            color: #5a4743;
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            color: #5a4743;
+        }
+
+        .countdown-section {
+            text-align: center;
+            background-color: #e6dace;
+            padding: 10px 15px;
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        .countdown-number {
+            font-family: 'Brittany', sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: #5a4743;
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            color: #5a4743;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 ¡Te esperamos en nuestra boda! 🎉</h1>
+    <div class="video-container">
+        <video id="invitation-video" autoplay muted loop>
+            <source src="invitacion.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de videos.
+        </video>
+        <div id="countdown-wrapper">
+            <p id="countdown-title">Cuenta regresiva</p>
+            <div id="countdown">
+                <div class="countdown-section">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">DÍAS</div>
+                </div>
+                <div class="countdown-section">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">HORAS</div>
+                </div>
+                <div class="countdown-section">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">MINUTOS</div>
+                </div>
+                <div class="countdown-section">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">SEGUNDOS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fecha objetivo en UTC-5 (Ecuador)
+        const targetDate = new Date("2025-01-11T16:00:00-05:00").getTime();
+        const countdownWrapper = document.getElementById('countdown-wrapper');
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+        const video = document.getElementById('invitation-video');
+
+        // Función para actualizar la cuenta regresiva
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                daysElement.textContent = days;
+                hoursElement.textContent = hours;
+                minutesElement.textContent = minutes;
+                secondsElement.textContent = seconds;
+            } else {
+                countdownWrapper.innerHTML = "<p id='countdown-title'>¡Es el gran día! 🎉</p>";
+            }
+        }
+
+        // Mostrar u ocultar la cuenta regresiva según el tiempo del video
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+
+            if (currentTime >= 6 && currentTime <= 19) {
+                countdownWrapper.style.display = 'block';
+            } else {
+                countdownWrapper.style.display = 'none';
+            }
+        });
+
+        // Actualizar la cuenta regresiva cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Inicialización inmediata
+    </script>
+</body>
+</html>
